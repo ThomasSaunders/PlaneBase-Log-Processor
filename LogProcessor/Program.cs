@@ -1,9 +1,9 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.IO;
+using ConsoleMenu;
 
 namespace LogProcessor
 {
@@ -11,31 +11,34 @@ namespace LogProcessor
     {
         static void Main(string[] args)
         {
-            List<string> log = ImportLog();
+            string[] mainMenuItems = new string[] { "Import Log", "View Cleaned Log", "Export Log", "Exit" };
 
-            for (int i = 0; i < log.Count; i++)
+            Log log;
 
-            ExportLog(log);
+            Menu mainMenu = new Menu(mainMenuItems, "PlaneBase Log Processor");
 
-            Console.ReadLine();
-        {
-            List<string> log = new List<string>();
-            
-            using (StreamReader sr = new StreamReader(fileLocation))
+            switch (mainMenu.displayMenu())
             {
-                string line = sr.ReadLine();
-                }
-
-                sr.Close();
+                case 0:
+                    log = importLog();
+                    break;
+                case 3:
+                    Environment.Exit(0);
+                    break;
+                default:
+                    break;
             }
 
-            return log;
+            Console.ReadLine();
+        }
+
+        static Log importLog()
         {
-            bool placedDivider = false;
+            Console.WriteLine("Please enter the file name of the log, excluding the txt extension.");
 
-            logEntry = logEntry.Trim();
+            string fileLocation = Console.ReadLine();
 
-            StringBuilder stringBuilder = new StringBuilder(logEntry);
+            return new Log(fileLocation);
         }
     }
 }
