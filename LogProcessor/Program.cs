@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,22 +11,29 @@ namespace LogProcessor
     {
         static void Main(string[] args)
         {
-            using(StreamReader sr = new StreamReader("ViewLog.txt"))
-            {
-                List<string> log = new List<string>();
 
+        }
+
+        static List<string> ImportLog(string fileLocation = "ViewLog.txt")
+        {
+            List<string> log = new List<string>();
+            
+            using (StreamReader sr = new StreamReader(fileLocation))
+            {
                 string line = sr.ReadLine();
 
                 while (line != null)
                 {
                     log.Add(line);
-                    
+
                     Console.WriteLine(line);
                 }
 
                 sr.Close();
             }
 
+            return log;
+        }
 
         }
     }
