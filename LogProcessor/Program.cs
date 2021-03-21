@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,10 +11,17 @@ namespace LogProcessor
     {
         static void Main(string[] args)
         {
+            List<string> log = ImportLog();
 
+            for (int i = 0; i < log.Count; i++)
+            {
+                log[i] = RemoveWhiteSpace(log[i]);
+            }
+
+            Console.ReadLine();
         }
 
-        static List<string> ImportLog(string fileLocation = "ViewLog.txt")
+        static List<string> ImportLog(string fileLocation = "viewlog.txt")
         {
             List<string> log = new List<string>();
             
