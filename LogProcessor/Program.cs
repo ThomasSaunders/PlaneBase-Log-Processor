@@ -35,6 +35,40 @@ namespace LogProcessor
             return log;
         }
 
+        static string RemoveWhiteSpace(string logEntry)
+        {
+            bool placedDivider = false;
+            int logLength = logEntry.Length;
+
+            StringBuilder stringBuilder = new StringBuilder(logEntry);
+
+            for (int i = 1; i < logLength - 1; i++)
+            {
+                if (char.IsWhiteSpace(logEntry[i]) && char.IsWhiteSpace(logEntry[i - 1]) && char.IsWhiteSpace(logEntry[i + 1]) && !placedDivider)
+                {
+                    stringBuilder[i] = '-';
+
+                    placedDivider = true;
+                }
+                else if (char.IsWhiteSpace(logEntry[i]) && char.IsWhiteSpace(logEntry[i - 1]) && char.IsWhiteSpace(logEntry[i + 1]) && placedDivider)
+                {
+                    stringBuilder.Remove(i, 1);
+
+                    logLength = stringBuilder.Length;
+                }
+                else if (!char.IsWhiteSpace(logEntry[i]) && char.IsWhiteSpace(logEntry[i - 1]) && placedDivider)
+                {
+                    placedDivider = false;
+                }
+
+
+            }
+
+            logEntry = stringBuilder.ToString();
+
+            Console.WriteLine(logEntry);
+
+            return logEntry;
         }
     }
 }
