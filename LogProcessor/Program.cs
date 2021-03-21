@@ -18,6 +18,8 @@ namespace LogProcessor
                 log[i] = RemoveWhiteSpace(log[i]);
             }
 
+            ExportLog(log);
+
             Console.ReadLine();
         }
 
@@ -83,6 +85,19 @@ namespace LogProcessor
             Console.WriteLine(logEntry);
 
             return logEntry;
+        }
+
+        static bool ExportLog(List<string> log)
+        {
+            using(StreamWriter streamWriter = new StreamWriter("ProcessedLog.txt"))
+            {
+                foreach (var entry in log)
+                {
+                    streamWriter.WriteLine(entry);
+                }
+            }
+
+            return true;
         }
     }
 }
