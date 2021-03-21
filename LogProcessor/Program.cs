@@ -26,7 +26,9 @@ namespace LogProcessor
                 {
                     log.Add(line);
 
-                    Console.WriteLine(line);
+                    //Console.WriteLine(line);
+
+                    line = sr.ReadLine();
                 }
 
                 sr.Close();
