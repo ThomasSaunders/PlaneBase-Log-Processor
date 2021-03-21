@@ -49,7 +49,11 @@ namespace LogProcessor
             bool placedDivider = false;
             int logLength = logEntry.Length;
 
+            logEntry = logEntry.Trim();
+
             StringBuilder stringBuilder = new StringBuilder(logEntry);
+
+            
 
             for (int i = 1; i < logLength - 1; i++)
             {
@@ -61,17 +65,18 @@ namespace LogProcessor
                 }
                 else if (char.IsWhiteSpace(logEntry[i]) && char.IsWhiteSpace(logEntry[i - 1]) && char.IsWhiteSpace(logEntry[i + 1]) && placedDivider)
                 {
-                    stringBuilder.Remove(i, 1);
+                    stringBuilder.Replace(" ", "☔", i, 1);
 
                     logLength = stringBuilder.Length;
+                    
                 }
                 else if (!char.IsWhiteSpace(logEntry[i]) && char.IsWhiteSpace(logEntry[i - 1]) && placedDivider)
                 {
                     placedDivider = false;
                 }
-
-
             }
+
+            stringBuilder.Replace("☔", "");
 
             logEntry = stringBuilder.ToString();
 
